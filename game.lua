@@ -15,8 +15,7 @@ game.map = {
     {2, 2, 2, 2, 3, 3, 2, 2, 2, 2},
     {2, 2, 2, 2, 2, 2, 2, 2, 2, 2},
     {2, 2, 2, 2, 2, 2, 2, 2, 2, 2},
-    {2, 1, 2, 2, 2, 2, 2, 2, 1, 2},
-    {2, 2, 2, 2, 2, 2, 2, 2, 2, 2}
+    {2, 1, 2, 2, 2, 2, 2, 2, 1, 2}
 }
 
 game.tileTexture = {}
@@ -43,6 +42,18 @@ function game.draw()
                 love.graphics.draw(texture, (c - 1) * TILE_WIDTH, (l - 1) * TILE_HEIGHT)
             end
         end
+    end
+
+    -- Check where is my mouse
+    local x = love.mouse.getX()
+    local y = love.mouse.getY()
+    local column = math.floor(x / TILE_WIDTH) + 1
+    local line = math.floor(y / TILE_HEIGHT) + 1
+    if column > 0 and column <= MAP_WIDTH and line > 0 and line <= MAP_HEIGHT then
+        local id = game.map[line][column]
+        love.graphics.print("id:" .. tostring(id), 1, 1)
+    else
+        love.graphics.print("Hors du tableau", 1, 1)
     end
 end
 

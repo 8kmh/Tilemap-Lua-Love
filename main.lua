@@ -1,6 +1,8 @@
 local myGame = require("game")
 
 function love.load()
+    love.window.setMode(1024, 768)
+
     width = love.graphics.getWidth()
     height = love.graphics.getHeight()
 
