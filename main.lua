@@ -1,17 +1,18 @@
 local myGame = require("game")
 
-function load()
+function love.load()
     width = love.graphics.getWidth()
     height = love.graphics.getHeight()
 
     myGame.load()
 end
 
-function update(dt)
+function love.update(dt)
 end
 
-function draw()
+function love.draw()
+    myGame.draw()
 end
 
-function keypressed(key)
+function love.keypressed(key)
 end
