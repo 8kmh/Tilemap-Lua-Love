@@ -847,6 +847,10 @@ function game.load()
     print("Game : texture loaded")
 end
 
+function game.update(dt)
+    game.hero.update(game.map, dt)
+end
+
 function game.draw()
     local c, l
 

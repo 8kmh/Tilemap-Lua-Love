@@ -10,12 +10,16 @@ hero.line = 1
 hero.column = 1
 
 function hero.update(map, dt)
+    hero.imgCurrent = hero.imgCurrent + (5 * dt)
+    if math.floor(hero.imgCurrent) > #hero.img then
+        hero.imgCurrent = 1
+    end
 end
 
-function hero.draw(map, dt)
+function hero.draw(map)
     local x = (hero.column - 1) * map.TILE_WIDTH
     local y = (hero.line - 1) * map.TILE_HEIGHT
-    love.graphics.draw(hero.img[hero.imgCurrent], x, y, 0, 2, 2)
+    love.graphics.draw(hero.img[math.floor(hero.imgCurrent)], x, y, 0, 2, 2)
 end
 
 return hero

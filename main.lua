@@ -10,6 +10,7 @@ function love.load()
 end
 
 function love.update(dt)
+    myGame.update(dt)
 end
 
 function love.draw()
