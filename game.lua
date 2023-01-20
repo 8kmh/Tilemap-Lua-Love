@@ -37,11 +37,22 @@ function game.load()
         end
     end
 
+    game.tileTypes[1] = "Rock"
     game.tileTypes[10] = "Grass"
     game.tileTypes[11] = "Grass"
     game.tileTypes[13] = "Sand"
     game.tileTypes[14] = "Sand"
     game.tileTypes[15] = "Sand"
+    game.tileTypes[19] = "Water"
+    game.tileTypes[20] = "Water"
+    game.tileTypes[21] = "Water"
+    game.tileTypes[37] = "Lava"
+    game.tileTypes[169] = "Rock"
+    game.tileTypes[129] = "Volcano"
+    game.tileTypes[55] = "Tree"
+    game.tileTypes[58] = "Tree"
+    game.tileTypes[61] = "Tree"
+    game.tileTypes[68] = "Tree"
 
     print("Game : texture loaded")
 end
