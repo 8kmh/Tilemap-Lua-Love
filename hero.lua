@@ -8,11 +8,36 @@ hero.img[4] = love.graphics.newImage("img/player_4.png")
 hero.imgCurrent = 1
 hero.line = 1
 hero.column = 1
+hero.keyPressed = false
 
 function hero.update(map, dt)
     hero.imgCurrent = hero.imgCurrent + (5 * dt)
     if math.floor(hero.imgCurrent) > #hero.img then
         hero.imgCurrent = 1
+    end
+
+    if love.keyboard.isDown("up", "right", "down", "left") then
+        if hero.keyPressed == false then
+            if love.keyboard.isDown("up") and hero.line > 1 then
+                hero.line = hero.line - 1
+            end
+
+            if love.keyboard.isDown("right") and hero.column < map.MAP_WIDTH then
+                hero.column = hero.column + 1
+            end
+
+            if love.keyboard.isDown("down") and hero.line < map.MAP_HEIGHT then
+                hero.line = hero.line + 1
+            end
+
+            if love.keyboard.isDown("left") and hero.column > 1 then
+                hero.column = hero.column - 1
+            end
+
+            hero.keyPressed = true
+        end
+    else
+        hero.keyPressed = false
     end
 end
 
