@@ -800,6 +800,14 @@ game.tileTypes = {}
 
 game.hero = require("hero")
 
+function game.map.isSolid(id)
+    local tileType = game.tileTypes[id]
+    if tileType == "Water" or tileType == "Tree" or tileType == "Rock" or tileType == "Volcano" then
+        return true
+    end
+    return false
+end
+
 function game.load()
     print("Game : loading texture...")
     game.tileSheet = love.graphics.newImage("img/tilesheet.png")
@@ -839,6 +847,7 @@ function game.load()
     game.tileTypes[37] = "Lava"
     game.tileTypes[169] = "Rock"
     game.tileTypes[129] = "Volcano"
+    game.tileTypes[142] = "Tree"
     game.tileTypes[55] = "Tree"
     game.tileTypes[58] = "Tree"
     game.tileTypes[61] = "Tree"

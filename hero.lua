@@ -18,6 +18,9 @@ function hero.update(map, dt)
 
     if love.keyboard.isDown("up", "right", "down", "left") then
         if hero.keyPressed == false then
+            local oldColumn = hero.column
+            local oldLine = hero.line
+
             if love.keyboard.isDown("up") and hero.line > 1 then
                 hero.line = hero.line - 1
             end
@@ -32,6 +35,13 @@ function hero.update(map, dt)
 
             if love.keyboard.isDown("left") and hero.column > 1 then
                 hero.column = hero.column - 1
+            end
+
+            local id = map.grid[hero.line][hero.column]
+            if map.isSolid(id) then
+                print("Collision !!!")
+                hero.column = oldColumn
+                hero.line = oldLine
             end
 
             hero.keyPressed = true
