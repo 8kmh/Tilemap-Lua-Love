@@ -1,5 +1,3 @@
-local myMap = require("map")
-
 local game = {}
 
 game.map = {}
@@ -789,6 +787,8 @@ game.map.grid = {
     }
 }
 
+game.map.fogGrid = {}
+
 game.map.MAP_WIDTH = 32
 game.map.MAP_HEIGHT = 23
 game.map.TILE_WIDTH = 32
@@ -854,10 +854,58 @@ function game.load()
     game.tileTypes[68] = "Tree"
 
     print("Game : texture loaded")
+    print("Created fog")
+
+    game.map.fogGrid = {}
+
+    local c, l
+
+    for l = 1, game.map.MAP_HEIGHT do
+        game.map.fogGrid[l] = {}
+        for c = 1, game.map.MAP_WIDTH do
+            game.map.fogGrid[l][c] = 1
+        end
+    end
+
+    print("End created fog")
+
+    game.map.clearFog2(game.hero.line, game.hero.column)
 end
 
 function game.update(dt)
     game.hero.update(game.map, dt)
+end
+
+function game.map.clearFog(line, column)
+    print("Clearing fog")
+    local c, l
+
+    for l = line - 1, line + 1 do
+        for c = column - 1, column + 1 do
+            if c > 0 and c <= game.map.MAP_WIDTH and l > 0 and l <= game.map.MAP_HEIGHT then
+                game.map.fogGrid[l][c] = 0
+            end
+        end
+    end
+end
+
+function game.map.clearFog2(line, column)
+    print("clearFog2")
+    local c, l
+
+    for l = 1, game.map.MAP_HEIGHT do
+        for c = 1, game.map.MAP_WIDTH do
+            if c > 0 and c <= game.map.MAP_WIDTH and l > 0 and l <= game.map.MAP_HEIGHT then
+                local dist = math.dist(c, l, column, line)
+                if dist < 4 then
+                    local alpha = dist / 5
+                    if game.map.fogGrid[l][c] > alpha then
+                        game.map.fogGrid[l][c] = alpha
+                    end
+                end
+            end
+        end
+    end
 end
 
 function game.draw()
@@ -868,12 +916,14 @@ function game.draw()
             local id = game.map.grid[l][c]
             local textQuad = game.tileTextures[id]
             if textQuad ~= nil then
-                love.graphics.draw(
-                    game.tileSheet,
-                    textQuad,
-                    (c - 1) * game.map.TILE_WIDTH,
-                    (l - 1) * game.map.TILE_HEIGHT
-                )
+                local x = (c - 1) * game.map.TILE_WIDTH
+                local y = (l - 1) * game.map.TILE_HEIGHT
+                love.graphics.draw(game.tileSheet, textQuad, x, y)
+                if game.map.fogGrid[l][c] > 0 then
+                    love.graphics.setColor(0, 0, 0, 1 * game.map.fogGrid[l][c])
+                    love.graphics.rectangle("fill", x, y, game.map.TILE_WIDTH, game.map.TILE_HEIGHT)
+                    love.graphics.setColor(255, 255, 255)
+                end
             end
         end
     end

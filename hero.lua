@@ -42,6 +42,8 @@ function hero.update(map, dt)
                 print("Collision !!!")
                 hero.column = oldColumn
                 hero.line = oldLine
+            else
+                map.clearFog2(hero.line, hero.column)
             end
 
             hero.keyPressed = true
