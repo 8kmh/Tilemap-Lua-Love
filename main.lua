@@ -1,3 +1,6 @@
+-- Prevent love to filter images on resized
+love.graphics.setDefaultFilter("nearest")
+
 local myGame = require("game")
 
 function math.dist(x1, y1, x2, y2)
