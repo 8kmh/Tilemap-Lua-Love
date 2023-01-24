@@ -1,14 +1,15 @@
-local hero = {}
+local hero = {
+    imgCurrent = 1,
+    line = 1,
+    column = 1,
+    keyPressed = false
+}
 
 hero.img = {}
 hero.img[1] = love.graphics.newImage("img/player_1.png")
 hero.img[2] = love.graphics.newImage("img/player_2.png")
 hero.img[3] = love.graphics.newImage("img/player_3.png")
 hero.img[4] = love.graphics.newImage("img/player_4.png")
-hero.imgCurrent = 1
-hero.line = 1
-hero.column = 1
-hero.keyPressed = false
 
 function hero.update(map, dt)
     hero.imgCurrent = hero.imgCurrent + (5 * dt)

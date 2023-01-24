@@ -1,6 +1,9 @@
-local game = {}
-
-game.map = {}
+local game = {
+    tileSheet = nil,
+    tileTextures = {},
+    tileTypes = {},
+    map = {}
+}
 
 game.map.grid = {
     {
@@ -793,10 +796,6 @@ game.map.MAP_WIDTH = 32
 game.map.MAP_HEIGHT = 23
 game.map.TILE_WIDTH = 32
 game.map.TILE_HEIGHT = 32
-
-game.tileSheet = nil
-game.tileTextures = {}
-game.tileTypes = {}
 
 game.hero = require("hero")
 
